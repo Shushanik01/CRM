@@ -24,6 +24,7 @@ export const registerUserService = async (name, email, password) => {
 };
 
 const payload = {
+    id: user._id,
     email: user.email,
     role: user.role
 }
