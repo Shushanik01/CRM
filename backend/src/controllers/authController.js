@@ -17,11 +17,19 @@ export const registerUser = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const { user, token } = await loginUserService(email, password);
-    res.status(200).json({ user, token });
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+    try {
+        const { email, password } = req.body;
+        const { user, token } = await loginUserService(email, password);
+        res.status(200).json({ user, token });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
 };
+
+export const getUserInfo = (req, res) => {
+    try {
+        res.status(200).json({ user: req.user })
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+}

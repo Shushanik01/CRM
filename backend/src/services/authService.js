@@ -35,7 +35,7 @@ export const loginUserService = async (email, password) => {
         if (!user) throw new Error("Invalid credentials")
         const pass = await bcrypt.compare(password, user.password)
         if (!pass) throw new Error("Invalid credentials");
-        const secret = process.env.SECRET
+        const secret = process.env.JWT_SECRET
         const token = jwt.sign(payload, secret)
         return { user, token }
     } catch (err) {
