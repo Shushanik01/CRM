@@ -1,7 +1,7 @@
 import {
     registerUserService,
     loginUserService
-} from "../services/authService";
+} from "../services/authService.js";
 
 export const registerUser = async (req, res) => {
     try {
