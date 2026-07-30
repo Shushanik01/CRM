@@ -20,3 +20,11 @@ try{
 }
 };
 
+export async function getAllCompanies(){
+    try{
+    const allCompanies = await Company.find();
+    return allCompanies
+    }catch(err){
+        throw new Error(err.message)
+    }
+}
