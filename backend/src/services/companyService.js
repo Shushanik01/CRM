@@ -28,15 +28,24 @@ export async function getAllCompanies() {
     }
 };
 
-export const getOneCompany = async(id) => {
+export const getOneCompany = async (id) => {
     try {
         const findCompany = await Company.findById(id);
-        if(!findCompany){
+        if (!findCompany) {
             throw new Error('Company is not registered')
-        } else{
+        } else {
             return findCompany
         }
-    } catch(err){
+    } catch (err) {
+        throw new Error(err.message)
+    }
+};
+
+export const editCompany = async (id, updateData) => {
+    try {
+        const company = await Company.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
+        return company
+    } catch (err) {
         throw new Error(err.message)
     }
 }

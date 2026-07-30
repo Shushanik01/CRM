@@ -1,7 +1,8 @@
 import {
     addCompany as companyService,
     getAllCompanies as getAll,
-    getOneCompany
+    getOneCompany,
+    editCompany
 } from "../services/companyService.js";
 
 export async function addCompany(req, res) {
@@ -32,4 +33,16 @@ export async function getSingleCompany(req, res) {
     } catch (err) {
         res.status(404).json(err.message)
     };
+};
+
+export async function updateCompany(req, res) {
+    try {
+        const updateData = req.body
+        const { id } = req.params
+        const updatedCompany = await editCompany(id, updateData)
+        res.status(200).json(updatedCompany)
+
+    } catch (err) {
+        res.status(404).json(err.message)
+    }
 };
