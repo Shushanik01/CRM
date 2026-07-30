@@ -1,19 +1,18 @@
 
-import Company from "../models/company";
+import Company from "../models/company.js";
 
 export async function addCompany(name, industry, website, createdBy){
 try{
     const compName = await Company.findOne({name});
     if(compName){
-    throw new Error ({message: "Company with this name already exits" })
-    } else {
-        const newCompany = await Company.create({
-            name, 
-            industry,
-            website, 
-            createdBy
-        });
-    }; 
+    throw new Error("Company with this name already exists")
+    }
+    const newCompany = await Company.create({
+        name,
+        industry,
+        website,
+        createdBy
+    });
     return newCompany
 }catch(err){
     throw new Error(err.message)
