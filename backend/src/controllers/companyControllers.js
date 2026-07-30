@@ -2,7 +2,8 @@ import {
     addCompany as companyService,
     getAllCompanies as getAll,
     getOneCompany,
-    editCompany
+    editCompany,
+    deleteCompany
 } from "../services/companyService.js";
 
 export async function addCompany(req, res) {
@@ -46,3 +47,13 @@ export async function updateCompany(req, res) {
         res.status(404).json(err.message)
     }
 };
+
+export async function removeCompany(req, res) {
+    try {
+        const { id } = req.params
+        const deleted = await deleteCompany(id);
+        res.status(200).json('Company deleted successfully')
+    } catch (err) {
+        res.status(404).json(err.message)
+    }
+}

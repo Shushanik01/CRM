@@ -48,4 +48,20 @@ export const editCompany = async (id, updateData) => {
     } catch (err) {
         throw new Error(err.message)
     }
+};
+
+export const deleteCompany = async (id) => {
+    try {
+        const deleteCompany = await Company.findByIdAndDelete(id);
+        if (!deleteCompany) {
+            throw new Error('Company does not exist')
+        } else {
+            return {
+                success: true,
+                message: "Company deleted successfully",
+            };
+        }
+    } catch (err) {
+        throw new Error(err.message)
+    }
 }
