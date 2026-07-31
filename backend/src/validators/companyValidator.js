@@ -1,4 +1,5 @@
-import body from 'express-validator';
+import { body } from 'express-validator';
+
 
 export const createCompanyValidator = [
     body("name").trim().notEmpty().withMessage("Company name is required"),

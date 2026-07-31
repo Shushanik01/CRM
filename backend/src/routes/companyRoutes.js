@@ -16,6 +16,6 @@ companyRoutes.post("/", protectAuth, createCompanyValidator, validate, addCompan
 companyRoutes.get("/", protectAuth, getALlCompany);
 companyRoutes.get('/:id', protectAuth, getSingleCompany);
 companyRoutes.put('/:id', protectAuth, checkOwnership(Company), updateCompanyValidator, validate, updateCompany);
-companyRoutes.delete('/:id', protectAuth, removeCompany)
+companyRoutes.delete('/:id', protectAuth, checkOwnership(Company), removeCompany)
 
 export default companyRoutes
