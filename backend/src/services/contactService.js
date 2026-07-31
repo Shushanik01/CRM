@@ -1,0 +1,61 @@
+import Contact from "../models/contact";
+
+export const getAllContacts = async () => {
+    try {
+        const allContact = await Contact.find();
+        return allContact
+    } catch (err) {
+        throw new Error(err.message)
+    }
+};
+
+export const getSingleContact = async (id) => {
+    try {
+        const contact = await Contact.findOne(id);
+        if (!contact) {
+            throw new Error('Contact does not exist')
+        } else {
+            return contact
+        }
+    } catch (err) {
+        throw new Error(err.message)
+    }
+};
+
+export const editContact = async (id, updateData) => {
+    try {
+        const contact = await Contact.findByIdAndUpdate(id, updateData, { now: true, runValidators: true });
+        if (!contact) {
+            throw new Error('No contact found')
+        } else {
+            return contact
+        }
+    } catch (err) {
+        throw new Error(err.message)
+    }
+};
+
+export const createContact = async (name, email, phone, company, createdBy) => {
+    try {
+        const newContact = await Contact.create({ name, email, phone, company, createdBy });
+        return newContact
+    } catch (err) {
+        throw new Error(err.message)
+    }
+};
+
+export const deleteContact = async (id) => {
+    try {
+        const deleted = await Contact.findByIdAndDelete(id);
+        if (!deleted) {
+            throw new Error('No suck contact exists')
+        } else {
+            return {
+                sucess: true,
+                message: 'Contact deleted successfully!'
+            }
+        }
+    } catch (err) {
+        throw new Error(err.message)
+    }
+}
