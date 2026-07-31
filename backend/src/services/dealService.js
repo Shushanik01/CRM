@@ -1,4 +1,4 @@
-import Deal from "../models/dealSchema";
+import Deal from "../models/dealSchema.js";
 
 export const createDeal =
     async (title, value, stage, contact, company, createdBy) => {
@@ -20,4 +20,13 @@ export const createDeal =
         } catch (err) {
             throw new Error(err.message)
         }
+    };
+
+export const getAllDeals = async () => {
+    try {
+        const allDeals = await Deal.find();
+        return allDeals
+    } catch (err) {
+        throw new Error(err.message)
     }
+}
