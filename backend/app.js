@@ -4,13 +4,15 @@ import dotenv from "dotenv"
 import cors from "cors"
 import authRouter from "./src/routes/authRoutes.js";
 import companyRoutes from "./src/routes/companyRoutes.js";
+import dealRoute from "./src/routes/dealRoutes.js";
 
 const app = express(); 
 dotenv.config()
 app.use(express.json())
 app.use(cors())
 app.use("/api/auth", authRouter);
-app.use("/api/company", companyRoutes)
+app.use("/api/company", companyRoutes);
+app.use("/api/deal", dealRoute)
 
 app.get("/", (req, res)=> {
    res.send("CRM API is running")
