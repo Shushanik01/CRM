@@ -21,7 +21,7 @@ export async function addCompany(name, industry, website, createdBy) {
 
 export async function getAllCompanies() {
     try {
-        const allCompanies = await Company.find();
+        const allCompanies = await Company.find().populate("createdBy");
         return allCompanies
     } catch (err) {
         throw new Error(err.message)
@@ -30,7 +30,7 @@ export async function getAllCompanies() {
 
 export const getOneCompany = async (id) => {
     try {
-        const findCompany = await Company.findById(id);
+        const findCompany = await Company.findById(id).populate("createdBy");
         if (!findCompany) {
             throw new Error('Company is not registered')
         } else {

@@ -2,7 +2,7 @@ import Contact from "../models/contact.js";
 
 export const getAllContacts = async () => {
     try {
-        const allContact = await Contact.find();
+        const allContact = await Contact.find().populate("company").populate("createdBy");
         return allContact
     } catch (err) {
         throw new Error(err.message)
@@ -11,7 +11,7 @@ export const getAllContacts = async () => {
 
 export const getSingleContact = async (id) => {
     try {
-        const contact = await Contact.findOne({ _id: id });
+        const contact = await Contact.findOne({ _id: id }).populate("company").populate("createdBy");
         if (!contact) {
             throw new Error('Contact does not exist')
         } else {

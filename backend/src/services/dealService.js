@@ -24,7 +24,7 @@ export const createDeal =
 
 export const getAllDeals = async () => {
     try {
-        const allDeals = await Deal.find();
+        const allDeals = await Deal.find().populate("contact").populate("company").populate("createdBy");
         return allDeals
     } catch (err) {
         throw new Error(err.message)
@@ -33,7 +33,7 @@ export const getAllDeals = async () => {
 
 export const getSingleDeal = async (title) => {
     try {
-        const deal = await Deal.findOne({ title });
+        const deal = await Deal.findOne({ title }).populate("contact").populate("company").populate("createdBy");
         return deal
     } catch (err) {
         throw new Error(err.message)
