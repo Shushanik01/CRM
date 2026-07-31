@@ -50,4 +50,21 @@ export async function updateDeal(id, updateData) {
     } catch (err) {
         throw new Error(err.message)
     }
-}
+};
+
+export const deleteDeal = async (id) => {
+    try {
+        const deleted = await Deal.findByIdAndDelete( id );
+        if (!deleted) {
+            throw new Error('Deal does not exist')
+        } else {
+            return {
+                success: true,
+                message: 'Deal deleted successfully'
+            }
+        }
+
+    } catch (err) {
+        throw new Error(err.message)
+    }
+};

@@ -3,6 +3,7 @@ import {
     getAllDeals as getAll,
     getSingleDeal,
     updateDeal,
+    deleteDeal
 } from "../services/dealService.js";
 
 export async function addNewDeal(req, res) {
@@ -45,6 +46,15 @@ export const updateOneDeal = async (req, res) => {
         const updateData = req.body
         const updated = await updateDeal(id, updateData);
         res.status(200).json(updated)
+    } catch (err) {
+        res.status(404).json(err.message)
+    };
+};
+export const removeDeal = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deleted = await deleteDeal(id);
+        res.status(200).json('Deal deleted successfully')
     } catch (err) {
         res.status(404).json(err.message)
     }
