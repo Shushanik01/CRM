@@ -1,4 +1,4 @@
-import Contact from "../models/contact";
+import Contact from "../models/contact.js";
 
 export const getAllContacts = async () => {
     try {
@@ -11,7 +11,7 @@ export const getAllContacts = async () => {
 
 export const getSingleContact = async (id) => {
     try {
-        const contact = await Contact.findOne(id);
+        const contact = await Contact.findOne({ _id: id });
         if (!contact) {
             throw new Error('Contact does not exist')
         } else {
@@ -24,7 +24,7 @@ export const getSingleContact = async (id) => {
 
 export const editContact = async (id, updateData) => {
     try {
-        const contact = await Contact.findByIdAndUpdate(id, updateData, { now: true, runValidators: true });
+        const contact = await Contact.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
         if (!contact) {
             throw new Error('No contact found')
         } else {
@@ -48,7 +48,7 @@ export const deleteContact = async (id) => {
     try {
         const deleted = await Contact.findByIdAndDelete(id);
         if (!deleted) {
-            throw new Error('No suck contact exists')
+            throw new Error('No such contact exists')
         } else {
             return {
                 sucess: true,
