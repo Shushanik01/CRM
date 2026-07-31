@@ -1,7 +1,8 @@
 import {
     createDeal,
     getAllDeals as getAll,
-    getSingleDeal
+    getSingleDeal,
+    updateDeal,
 } from "../services/dealService.js";
 
 export async function addNewDeal(req, res) {
@@ -25,15 +26,26 @@ export async function getAllDeals(req, res) {
     }
 };
 
-export const getOneDeal = async(req, res) =>{
+export const getOneDeal = async (req, res) => {
     try {
-        const {title} = req.params
+        const { title } = req.params
         const sindleDeal = await getSingleDeal(title);
-        if(!sindleDeal){
+        if (!sindleDeal) {
             throw new Error(' Deal does not exist')
         }
         res.status(200).json(sindleDeal)
-    } catch(err){
+    } catch (err) {
         res.status(400).json(err.message)
+    }
+};
+
+export const updateOneDeal = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updateData = req.body
+        const updated = await updateDeal(id, updateData);
+        res.status(200).json(updated)
+    } catch (err) {
+        res.status(404).json(err.message)
     }
 }

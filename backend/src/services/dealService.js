@@ -39,3 +39,15 @@ export const getSingleDeal = async (title) => {
         throw new Error(err.message)
     }
 };
+
+export async function updateDeal(id, updateData) {
+    try {
+        const updateDeal = await Deal.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
+        if (!updateDeal) {
+            throw new Error('Deal does not exist')
+        };
+        return updateDeal
+    } catch (err) {
+        throw new Error(err.message)
+    }
+}
