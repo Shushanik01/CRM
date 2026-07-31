@@ -1,4 +1,4 @@
-import { protectAuth } from "../middlewares/authMiddleware";
+import { protectAuth } from "../middlewares/authMiddleware.js";
 import {
     getAllContacts,
     getSingleContact,
@@ -19,10 +19,10 @@ export const allContacts = async (req, res) => {
 export const singleContact = async (req, res) => {
     try {
         const { id } = req.params
-        const contact = await getAllContacts(id);
+        const contact = await getSingleContact(id);
         res.status(200).json(contact)
     } catch (err) {
-        throw new Error(err.message)
+        res.status(404).json(err.message)
     }
 };
 
@@ -34,7 +34,7 @@ export const addContact = async (req, res) => {
         const newContact = await createContact(name, email, phone, company, createdBy);
         res.status(201).json(newContact)
     } catch (err) {
-        throw new Error(err.message)
+        res.status(404).json(err.message)
     }
 };
 
