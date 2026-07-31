@@ -29,4 +29,13 @@ export const getAllDeals = async () => {
     } catch (err) {
         throw new Error(err.message)
     }
-}
+};
+
+export const getSingleDeal = async (title) => {
+    try {
+        const deal = await Deal.findOne({ title });
+        return deal
+    } catch (err) {
+        throw new Error(err.message)
+    }
+};
