@@ -1,4 +1,3 @@
-import { Timestamp } from "mongodb";
 import mongoose from "mongoose";
 
 const dealSchema = mongoose.Schema({
@@ -30,7 +29,7 @@ createdBy:{
 }
 },
 {
-    Timestamp: true
+    timestamps: true
 });
 const Deal = mongoose.model("Deal", dealSchema);
 export default Deal

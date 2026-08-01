@@ -1,30 +1,67 @@
 
-import Company from "../models/company";
+import Company from "../models/company.js";
 
-export async function addCompany(name, industry, website, createdBy){
-try{
-    const compName = await Company.findOne({name});
-    if(compName){
-    throw new Error ({message: "Company with this name already exits" })
-    } else {
+export async function addCompany(name, industry, website, createdBy) {
+    try {
+        const compName = await Company.findOne({ name });
+        if (compName) {
+            throw new Error("Company with this name already exists")
+        }
         const newCompany = await Company.create({
-            name, 
+            name,
             industry,
-            website, 
+            website,
             createdBy
         });
-    }; 
-    return newCompany
-}catch(err){
-    throw new Error(err.message)
-}
+        return newCompany
+    } catch (err) {
+        throw new Error(err.message)
+    }
 };
 
-export async function getAllCompanies(){
-    try{
-    const allCompanies = await Company.find();
-    return allCompanies
-    }catch(err){
+export async function getAllCompanies() {
+    try {
+        const allCompanies = await Company.find().populate("createdBy");
+        return allCompanies
+    } catch (err) {
+        throw new Error(err.message)
+    }
+};
+
+export const getOneCompany = async (id) => {
+    try {
+        const findCompany = await Company.findById(id).populate("createdBy");
+        if (!findCompany) {
+            throw new Error('Company is not registered')
+        } else {
+            return findCompany
+        }
+    } catch (err) {
+        throw new Error(err.message)
+    }
+};
+
+export const editCompany = async (id, updateData) => {
+    try {
+        const company = await Company.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
+        return company
+    } catch (err) {
+        throw new Error(err.message)
+    }
+};
+
+export const deleteCompany = async (id) => {
+    try {
+        const deleteCompany = await Company.findByIdAndDelete(id);
+        if (!deleteCompany) {
+            throw new Error('Company does not exist')
+        } else {
+            return {
+                success: true,
+                message: "Company deleted successfully",
+            };
+        }
+    } catch (err) {
         throw new Error(err.message)
     }
 }

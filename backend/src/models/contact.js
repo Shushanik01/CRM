@@ -1,4 +1,3 @@
-import { Timestamp } from "mongodb";
 import mongoose from "mongoose";
 
 const contactSchema = mongoose.Schema({
@@ -21,7 +20,7 @@ const contactSchema = mongoose.Schema({
     }
 },
 {
-    Timestamp: true
+    timestamps: true
 });
 
 const Contact = mongoose.model("Contact", contactSchema);
