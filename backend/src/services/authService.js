@@ -15,7 +15,15 @@ export const registerUserService = async (name, email, password) => {
                 password: hashedPassword
             })
             newUser.password = undefined
-            return newUser
+
+            const payload = {
+                id: newUser._id,
+                email: newUser.email,
+                role: newUser.role
+            }
+            const token = jwt.sign(payload, process.env.JWT_SECRET)
+
+            return { user: newUser, token }
         }
 
     } catch (err) {

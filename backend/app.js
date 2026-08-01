@@ -1,16 +1,19 @@
-import express from "express"; 
+import express from "express";
 import connectDB from "./src/config/db.js"
 import dotenv from "dotenv"
 import cors from "cors"
+import cookieParser from "cookie-parser"
 import authRouter from "./src/routes/authRoutes.js";
 import companyRoutes from "./src/routes/companyRoutes.js";
 import dealRoute from "./src/routes/dealRoutes.js";
 import contactRouter from "./src/routes/contactRoutes.js";
 
-const app = express(); 
+
+const app = express();
 dotenv.config()
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cookieParser())
+app.use(cors({ origin: "http://localhost:5173", credentials: true }))
 app.use("/api/auth", authRouter);
 app.use("/api/company", companyRoutes);
 app.use("/api/deal", dealRoute);

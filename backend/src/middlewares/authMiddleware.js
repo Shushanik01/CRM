@@ -2,15 +2,14 @@ import jwt from 'jsonwebtoken';
 
 export const protectAuth = (req, res, next) => {
     try {
-        const authHeader = req.headers.authorization;
+        const token = req.cookies.token;
 
-        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        if (!token) {
           return  res.status(401).json({
                 success: false,
                 message: 'You do not have access'
             });
         };
-        const token = authHeader.split(' ')[1];
 
         const jwtSecret = process.env.JWT_SECRET;
 
