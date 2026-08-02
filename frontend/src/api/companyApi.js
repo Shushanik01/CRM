@@ -11,14 +11,15 @@ export const createCompany = async (companyData) => {
 };
 
 export const deleteCompany = async (id) => {
-    const deleted = await axiosClient.delete(id);
+    const deleted = await axiosClient.delete(`/company/${id}`);
     return deleted.data
 };
 
 export const getSingleCompany = async (id) => {
-    const company = await axiosClient.get('/company/:id');
+    const company = await axiosClient.get(`/company/${id}`);
     return company.data
 };
 export const editCompany = async(id, data) =>{
-    const edited = await axiosClient.put('/company/:id', data)
+    const edited = await axiosClient.put(`/company/${id}`, data);
+    return edited.data
 }
