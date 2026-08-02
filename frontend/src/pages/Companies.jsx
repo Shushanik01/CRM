@@ -1,9 +1,6 @@
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
-import {
-    useCompanies,
-    useCreateCompany,
-} from "../hooks/useCompanies";
+import { useCompanies, useCreateCompany} from "../hooks/useCompanies";
 
 export default function Companies() {
 
