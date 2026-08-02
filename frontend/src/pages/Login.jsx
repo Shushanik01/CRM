@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { loginUser } from '../api/authApi';
-import { useDispatch } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '../features/auth/authSlice.js'
 
@@ -16,25 +16,24 @@ export const Login = () => {
         mutationFn: loginUser,
         onSuccess: (data) => {
             dispatch(setCredentials(data))
-            navigate('dashboard')
+            navigate('/dashboard')
         }
-    });
-
-    const onSubmit = (formData) => {
+    })
+            const onSubmit = (formData) => {
         mutation.mutate(formData)
     };
 
     return (
-        <form action="submit">
+        <form onSubmit={handleSubmit(onSubmit)}>
 
             <label htmlFor="email"></label>
-            <input type="text" placeholder="email" name="email"
+            <input id="email" type="text" placeholder="email" name="email"
                 {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
             />
             {errors.email && <p>{errors.email.message}</p>}
 
             <label htmlFor="password"></label>
-            <input type="text" placeholder="password" name="password"
+            <input id='password' type="password" placeholder="password" name="password"
                 {...register('password', { required: true })}
             />
             {errors.password && <p>{errors.password.message}</p>}
