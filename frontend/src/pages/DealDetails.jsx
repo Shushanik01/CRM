@@ -2,7 +2,6 @@ import { Fragment, useEffect } from "react";
 import { useRemoveDeal, useUpdateDeal, useOneDeal } from "../hooks/useDeals";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
 import { useCompanies } from "../hooks/useCompanies";
 import { useAllContacts } from "../hooks/useContact";
 
