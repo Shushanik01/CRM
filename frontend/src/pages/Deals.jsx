@@ -64,7 +64,9 @@ export const Deals = () => {
                 <button type="submit"
                     disabled={createMutation.isPending}
                 >{createMutation.isPending ? "Creating..." : "Create"}</button>
-                {createMutation.isError && createMutation.error?.data?.response?.message || 'Failed creating a deal!'}
+                {createMutation.isError && (
+                    <p>{createMutation.error?.response?.data?.message || 'Failed creating a deal!'}</p>
+                )}
             </form>
         </Fragment>
     )
